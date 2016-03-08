@@ -1,9 +1,11 @@
 # NineGridImageView
 
-
-Fork from https://github.com/laobie/NineGridImageView
+==============更改说明===========================================
+###Fork from https://github.com/laobie/NineGridImageView
 
 ### 修改了在图片数量小于等于4张，大于一张的时候，图片显示过大问题。
+=========================================================
+
 
 [中文版说明点我](http://laobie.github.io/android/2016/03/06/nine-grid-iamge-view-libaray.html)
 
