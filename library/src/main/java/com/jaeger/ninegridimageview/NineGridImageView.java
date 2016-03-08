@@ -58,7 +58,12 @@ public class NineGridImageView<T> extends ViewGroup {
                 mGridSize = mSingleImgSize;
             } else {
                 mImageViewList.get(0).setScaleType(ImageView.ScaleType.CENTER_CROP);
-                mGridSize = (totalWidth - mGap * (mColumnCount - 1)) / mColumnCount;
+                //当时四个时候重新甲酸gridsize
+                if (mImgDataList.size() <= 4){
+                    mGridSize = (totalWidth - mGap * (mColumnCount)) / (mColumnCount + 1);
+                }else {
+                    mGridSize = (totalWidth - mGap * (mColumnCount - 1)) / mColumnCount;
+                }
             }
             height = mGridSize * mRowCount + mGap * (mRowCount - 1) + getPaddingTop() + getPaddingBottom();
             setMeasuredDimension(width, height);
@@ -88,14 +93,31 @@ public class NineGridImageView<T> extends ViewGroup {
             }
             int rowNum = i / mColumnCount;
             int columnNum = i % mColumnCount;
-            int left = (mGridSize + mGap) * columnNum + getPaddingLeft();
-            int top = (mGridSize + mGap) * rowNum + getPaddingTop();
+            int[] position = findPosition(i);
+
+            int left = (mGridSize + mGap) * position[1] + getPaddingLeft();
+            int top = (mGridSize + mGap) * position[0] + getPaddingTop();
             int right = left + mGridSize;
             int bottom = top + mGridSize;
 
             childrenView.layout(left, top, right, bottom);
         }
     }
+
+    private int[] findPosition(int childNum) {
+        int[] position = new int[2];
+        for (int i = 0; i < mRowCount; i++) {
+            for (int j = 0; j < mColumnCount; j++) {
+                if ((i * mColumnCount + j) == childNum) {
+                    position[0] = i;//行
+                    position[1] = j;//列
+                    break;
+                }
+            }
+        }
+        return position;
+    }
+
 
     /**
      * 设置图片数据
@@ -179,10 +201,10 @@ public class NineGridImageView<T> extends ViewGroup {
         int[] gridParam = new int[2];
         switch (showStyle) {
             case STYLE_FILL:
-                if (imagesSize < 3) {
+                if (imagesSize <= 3) {
                     gridParam[0] = 1;
                     gridParam[1] = imagesSize;
-                } else if (imagesSize <= 4) {
+                }  else if (imagesSize == 4) {
                     gridParam[0] = 2;
                     gridParam[1] = 2;
                 } else {
