@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import com.jaeger.ninegridimageview.NineGridImageView;
+import com.wx.ninegridview.NineGridLayout;
 import com.jaeger.ninegridimgdemo.R;
 import com.jaeger.ninegridimgdemo.adapter.PostAdapter;
 import com.jaeger.ninegridimgdemo.entity.Post;
@@ -53,7 +53,7 @@ public class FillStyleActivity extends AppCompatActivity {
             Post post = new Post("看图，字不重要。想看大图？抱歉我还没做这个 ( •̀ .̫ •́ )", imgUrls);
             mPostList.add(post);
         }
-        mPostAdapter = new PostAdapter(this, mPostList, NineGridImageView.STYLE_FILL);
+        mPostAdapter = new PostAdapter(this, mPostList, NineGridLayout.STYLE_FILL);
         mRvPostLister.setAdapter(mPostAdapter);
     }
 }

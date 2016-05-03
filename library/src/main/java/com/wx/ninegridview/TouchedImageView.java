@@ -1,4 +1,4 @@
-package com.jaeger.ninegridimageview;
+package com.wx.ninegridview;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,18 +9,19 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 /**
- * Created by Jaeger on 16/2/24.
+ * Description: 可触摸变色view
  *
- * Email: chjie.jaeger@gamil.com
- * GitHub: https://github.com/laobie
+ * Created by wangjianlei on 16/3/7.
+ * Email: wangjianlei@jldaren.com
+ * Phone: 13166828431
  */
-public class GridImageView extends ImageView {
+public class TouchedImageView extends ImageView {
 
-    public GridImageView(Context context, AttributeSet attrs) {
+    public TouchedImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GridImageView(Context context) {
+    public TouchedImageView(Context context) {
         super(context);
     }
 

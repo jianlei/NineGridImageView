@@ -1,4 +1,4 @@
-package com.jaeger.ninegridimageview;
+package com.wx.ninegridview;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

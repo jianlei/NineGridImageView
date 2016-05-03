@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.jaeger.ninegridimageview.NineGridImageView;
-import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
+import com.wx.ninegridview.NineGridLayout;
+import com.wx.ninegridview.NineGridLayoutAdapter;
 import com.jaeger.ninegridimgdemo.R;
 import com.jaeger.ninegridimgdemo.entity.Post;
 import com.squareup.picasso.Picasso;
@@ -45,7 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (mShowStyle == NineGridImageView.STYLE_FILL) {
+        if (mShowStyle == NineGridLayout.STYLE_FILL) {
             return new PostViewHolder(mInflater.inflate(R.layout.item_post_fill_style, parent, false));
         } else {
             return new PostViewHolder(mInflater.inflate(R.layout.item_post_grid_style, parent, false));
@@ -53,10 +53,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
-        private NineGridImageView mNglContent;
+        private NineGridLayout mNglContent;
         private TextView mTvContent;
 
-        private NineGridImageViewAdapter<String> mAdapter = new NineGridImageViewAdapter<String>() {
+        private NineGridLayoutAdapter<String> mAdapter = new NineGridLayoutAdapter<String>() {
             @Override
             protected void onDisplayImage(Context context, ImageView imageView, String s) {
                 Picasso.with(context)
@@ -79,7 +79,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public PostViewHolder(View itemView) {
             super(itemView);
             mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
-            mNglContent = (NineGridImageView) itemView.findViewById(R.id.ngl_images);
+            mNglContent = (NineGridLayout) itemView.findViewById(R.id.ngl_images);
             mNglContent.setAdapter(mAdapter);
         }
 

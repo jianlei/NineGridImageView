@@ -1,4 +1,4 @@
-package com.jaeger.ninegridimageview;
+package com.wx.ninegridview;
 
 import org.junit.Test;
 

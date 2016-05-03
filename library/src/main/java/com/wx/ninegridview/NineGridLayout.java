@@ -1,4 +1,4 @@
-package com.jaeger.ninegridimageview;
+package com.wx.ninegridview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,16 +7,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Jaeger on 16/2/24.
+ * Description: 九宫格
  *
- * Email: chjie.jaeger@gamil.com
- * GitHub: https://github.com/laobie
+ * Created by wangjianlei on 16/3/7.
+ * Email: wangjianlei@jldaren.com
+ * Phone: 13166828431
  */
-public class NineGridImageView<T> extends ViewGroup {
+public class NineGridLayout<T> extends ViewGroup {
 
     public final static int STYLE_GRID = 0;     // 宫格布局
     public final static int STYLE_FILL = 1;     // 全填充布局
@@ -32,18 +35,18 @@ public class NineGridImageView<T> extends ViewGroup {
     private List<ImageView> mImageViewList = new ArrayList<>();
     private List<T> mImgDataList;
 
-    private NineGridImageViewAdapter<T> mAdapter;
+    private NineGridLayoutAdapter<T> mAdapter;
 
-    public NineGridImageView(Context context) {
+    public NineGridLayout(Context context) {
         this(context, null);
     }
 
-    public NineGridImageView(Context context, AttributeSet attrs) {
+    public NineGridLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NineGridImageView);
-        this.mGap = (int) typedArray.getDimension(R.styleable.NineGridImageView_imgGap, 0);
-        this.mSingleImgSize = typedArray.getDimensionPixelSize(R.styleable.NineGridImageView_singleImgSize, -1);
-        this.mShowStyle = typedArray.getInt(R.styleable.NineGridImageView_showStyle, STYLE_GRID);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NineGridLayout);
+        this.mGap = (int) typedArray.getDimension(R.styleable.NineGridLayout_imgGap, 0);
+        this.mSingleImgSize = typedArray.getDimensionPixelSize(R.styleable.NineGridLayout_singleImgSize, -1);
+        this.mShowStyle = typedArray.getInt(R.styleable.NineGridLayout_showStyle, STYLE_GRID);
         typedArray.recycle();
     }
 
@@ -58,17 +61,17 @@ public class NineGridImageView<T> extends ViewGroup {
                 mGridSize = mSingleImgSize;
             } else {
                 mImageViewList.get(0).setScaleType(ImageView.ScaleType.CENTER_CROP);
-                //当时四个时候重新甲酸gridsize
+                //wjl 当时四个时候重新甲酸gridsize
                 if (mImgDataList.size() <= 4){
                     mGridSize = (totalWidth - mGap * (mColumnCount)) / (mColumnCount + 1);
-                }else {
+                } else {
                     mGridSize = (totalWidth - mGap * (mColumnCount - 1)) / mColumnCount;
                 }
             }
             height = mGridSize * mRowCount + mGap * (mRowCount - 1) + getPaddingTop() + getPaddingBottom();
             setMeasuredDimension(width, height);
         } else {
-            height = width;
+            height = 0;
             setMeasuredDimension(width, height);
         }
     }
@@ -91,8 +94,8 @@ public class NineGridImageView<T> extends ViewGroup {
             if (mAdapter != null) {
                 mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
             }
-            int rowNum = i / mColumnCount;
-            int columnNum = i % mColumnCount;
+//            int rowNum = i / mColumnCount;
+//            int columnNum = i % mColumnCount;
             int[] position = findPosition(i);
 
             int left = (mGridSize + mGap) * position[1] + getPaddingLeft();
@@ -104,6 +107,12 @@ public class NineGridImageView<T> extends ViewGroup {
         }
     }
 
+    /**
+     * 通过子view的顺序返回对应的值
+     *
+     * @param childNum
+     * @return
+     */
     private int[] findPosition(int childNum) {
         int[] position = new int[2];
         for (int i = 0; i < mRowCount; i++) {
@@ -126,6 +135,9 @@ public class NineGridImageView<T> extends ViewGroup {
      */
     public void setImagesData(List lists) {
         if (lists == null || lists.isEmpty()) {
+//            Log.e("wjl","setImagesData-----------");
+            removeAllViews();
+            invalidate();
             return;
         }
         if (lists.size() > 9) {
@@ -225,7 +237,7 @@ public class NineGridImageView<T> extends ViewGroup {
      *
      * @param adapter 适配器
      */
-    public void setAdapter(NineGridImageViewAdapter adapter) {
+    public void setAdapter(NineGridLayoutAdapter adapter) {
         mAdapter = adapter;
     }
 

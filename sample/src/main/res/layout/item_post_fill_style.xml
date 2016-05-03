@@ -16,7 +16,7 @@ android:padding="8dp">
     android:textColor="#333333"
     android:textSize="16sp"/>
 
-<com.jaeger.ninegridimageview.NineGridImageView
+<com.wx.ninegridview.NineGridLayout
     android:id="@+id/ngl_images"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

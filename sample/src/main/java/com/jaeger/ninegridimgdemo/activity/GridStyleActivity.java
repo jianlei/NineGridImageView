@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import com.jaeger.ninegridimageview.NineGridImageView;
+import com.wx.ninegridview.NineGridLayout;
 import com.jaeger.ninegridimgdemo.R;
 import com.jaeger.ninegridimgdemo.adapter.PostAdapter;
 import com.jaeger.ninegridimgdemo.entity.Post;
@@ -55,7 +55,7 @@ public class GridStyleActivity extends AppCompatActivity {
             mPostList.add(post);
         }
 
-        mNineImageAdapter = new PostAdapter(this, mPostList, NineGridImageView.STYLE_GRID);
+        mNineImageAdapter = new PostAdapter(this, mPostList, NineGridLayout.STYLE_GRID);
         mRvPostLister.setAdapter(mNineImageAdapter);
     }
 }
